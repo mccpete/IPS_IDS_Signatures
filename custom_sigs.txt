@@ -1,0 +1,7 @@
+#Blocks win7 hosts
+block http $HOME_NET any -> $HOME_NET any (msg:"SP-Windows_7Hosts"; http.user_agent; content:"Mozilla/5.0 (Windows NT 6.1\; Win64\; x64\; rv:109.0)"; nocase; classtype:policy-violation; sid:2026523; rev:1;)
+
+#Alerting of ping and telnet from internal and external hosts
+alert tcp $HOME_NET any -> $HOME_NET 23 (msg:"SP-Telnet Login Attempt"; flow:to_server,established; content:"LOGIN "; classtype:attempted-user; sid:1000008; rev:1;)
+alert icmp $HOME_NET any -> $HOME_NET any (msg:"SP-Internal ICMP Echo Request Detected"; itype:8; classtype:icmp-event; sid:1000051; rev:1;)
+alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"SP-External to Internal ICMP Echo Request Detected"; itype:8; classtype:icmp-event; sid:1008052; rev:1;)
