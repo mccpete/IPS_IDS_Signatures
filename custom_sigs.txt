@@ -55,6 +55,24 @@ alert http $HOME_NET any -> $HOME_NET any (msg:"SP-Windows_XPHosts_Chrome"; http
 FireFox:
 alert http $HOME_NET any -> $HOME_NET any (msg:"SP-Windows_XPHosts_Firefox"; http.user_agent; content:"Mozilla/5.0 (Windows NT 5.1\; rv:52.0) Gecko/20100101 Firefox/52.0"; nocase; classtype:policy-violation; sid:2026527; rev:1;)
 
+iPhone
+Firefox
+alert http $HOME_NET any -> $HOME_NET any (msg:"SP-iPhone_Unmanaged_detect_ffox"; content:"Mozilla/5.0 (iPhone\; CPU iPhone OS 18_3 like MAC OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/134 Mobile/15E148 Version/15.0"; http_user_agent; nocase; classtype:policy-violation; sid:2026591; rev:1;)
+
+Chrome/Brave
+alert http $HOME_NET any -> $HOME_NET any (msg:"SP-iPhone_Unmanaged_detect_chrome"; content:"Mozilla/5.0 (iPhone\; CPU iPhone OS 18_0 like MAC OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"; http_user_agent; nocase; classtype:policy-violation; sid:2026592; rev:1;)
+
+Safari
+alert http $HOME_NET any -> $HOME_NET any (msg:"SP-iPhone_Unmanaged_detect_safari"; content:"Mozilla/5.0 (iPhone\; CPU iPhone OS 18_3 like MAC OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3 Mobile/15E148 Safari/604.1"; http_user_agent; nocase; classtype:policy-violation; sid:2026593; rev:1;)
+
+Android
+
+Firefox
+alert http $HOME_NET any -> $HOME_NET any (msg:"SP-Andriod_Unmanaged_detect_ffox"; content:"Mozilla/5.0 (Android 10\; Mobile\; rv:135.0) Gecko/135.0 Firefox/135.0"; http_user_agent; nocase; classtype:policy-violation; sid:2026594; rev:1;)
+
+Chrome
+alert http $HOME_NET any -> $HOME_NET any (msg:"SP-Android_Unmanaged_detect_chrome"; content:"Mozilla/5.0 (Linux\; Android 9\; VirtualBox) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.101 Safari/537.36"; http_user_agent; nocase; classtype:policy-violation; sid:2026595; rev:1;)
+
 
 #Alerting of ping and telnet from internal and external hosts
 alert tcp $HOME_NET any -> $HOME_NET 23 (msg:"SP-Telnet Login Attempt"; flow:to_server,established; content:"LOGIN "; classtype:attempted-user; sid:1000008; rev:1;)
