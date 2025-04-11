@@ -1,3 +1,19 @@
+!#Reverse Shell common port numbers also includifn bash + powershell#!
+
+alert tcp $HOME_NET any -> $HOME_NET 4444 (msg:"SP-Potential Reverse Shell Connection 4444"; classtype:shellcode-detect; priority:1; sid:2026596; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 1337 (msg:"SP-Potential Reverse Shell Connection 1337"; classtype:shellcode-detect; priority:1; sid:2026597; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 9002 (msg:"SP-Potential Reverse Shell Connection 9002"; classtype:shellcode-detect; priority:1; sid:2026598; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 9001 (msg:"SP-Potential Reverse Shell Connection 9001"; classtype:shellcode-detect; priority:1; sid:2026608; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 2222 (msg:"SP-Potential Reverse Shell Connection 2222"; classtype:shellcode-detect; priority:1; sid:2026599; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 1234 (msg:"SP-Potential Reverse Shell Connection 1234"; classtype:shellcode-detect; priority:1; sid:2026600; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 4567 (msg:"SP-Potential Reverse Shell Connection 4567"; classtype:shellcode-detect; priority:1; sid:2026601; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 6666 (msg:"SP-Potential Reverse Shell Connection 6666"; classtype:shellcode-detect; priority:1; sid:2026602; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 6667 (msg:"SP-Potential Reverse Shell Connection 6667"; classtype:shellcode-detect; priority:1; sid:2026603; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET any (msg:"SP-[REVSHELL] Bash Reverse Shell Detected via /dev/tcp"; content:"/dev/tcp/"; nocase; classtype:shellcode-detect; flow:to_server,established; sid:2026604; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET any (msg:"SP-Suspicious PowerShell Reverse Shell - TCPClient Detected"; content:"System.Net.Sockets.TCPClient"; nocase; content:"System.Text.ASCIIEncoding"; nocase; content:"iex"; nocase; flow:established,to_server; classtype:trojan-activity; metadata:policy security; sid:2026605; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET any (msg:"SP-ET EXPLOIT Possible Reverse Shell via Bash"; content:"bash -i"; depth:8; sid:2026607; rev:1;)
+
+
 !#Blocks Windows hosts ranging from winxp to win10 using user agents for each browser type.#!
 
 Win 10
