@@ -1,3 +1,18 @@
+!#Evil WinRM Shell with port numbers and UA#!
+
+alert tcp $HOME_NET any -> $HOME_NET 5985 (msg:"SP-Possible Malicious WinRM Activity 5985 to winrm"; classtype:attempted-admin; sid:2026610; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 5986 (msg:"SP-Possible Malicious WinRM Activity 5986 to winrm"; classtype:attempted-admin; sid:2026611; rev:1;)
+
+alert tcp $HOME_NET 5985 -> $HOME_NET any (msg:"SP-Possible Malicious WinRM Activity 5985 from winrm"; classtype:attempted-admin; sid:2026612; rev:1;)
+alert tcp $HOME_NET 5986 -> $HOME_NET any (msg:"SP-Possible Malicious WinRM Activity 5986 from winrm"; classtype:attempted-admin; sid:2026613; rev:1;)
+
+alert tcp $HOME_NET any -> $HOME_NET 5985 (msg:"SP-Possible Malicious WinRM Activity 5985 - User Agent"; http_user_agent; content:"Microsoft WinRM Client"; nocase; classtype:attempted-admin; sid:2026614; rev:1;)
+alert tcp $HOME_NET any -> $HOME_NET 5986 (msg:"SP-Possible Malicious WinRM Activity 5986 - User Agent"; http_user_agent; content:"Microsoft WinRM Client"; nocase; classtype:attempted-admin; sid:2026615; rev:1;)
+
+alert tcp $HOME_NET 5985 -> $HOME_NET any (msg:"SP-Possible Malicious WinRM Activity 5985 - User Agent"; http_user_agent; content:"Microsoft WinRM Client"; nocase; classtype:attempted-admin; sid:2026616; rev:1;)
+alert tcp $HOME_NET 5986 -> $HOME_NET any (msg:"SP-Possible Malicious WinRM Activity 5986 - User Agent"; http_user_agent; content:"Microsoft WinRM Client"; nocase; classtype:attempted-admin; sid:2026617; rev:1;)
+
+
 !#Reverse Shell common port numbers also includifn bash + powershell#!
 
 alert tcp $HOME_NET any -> $HOME_NET 4444 (msg:"SP-Potential Reverse Shell Connection 4444"; classtype:shellcode-detect; priority:1; sid:2026596; rev:1;)
